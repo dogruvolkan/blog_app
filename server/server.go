@@ -5,9 +5,19 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+func init() {
+	database.ConnectDB()
+}
+
 func main() {
 
-	database.ConnectDB()
+	sqlDb, err := database.DBCon.DB()
+
+	if err != nil {
+		panic("Error in sql connection")
+	}
+
+	defer sqlDb.Close()
 
 	app := fiber.New()
 
