@@ -3,6 +3,7 @@ package database
 import (
 	"log"
 
+	"github.com/dogruvolkan/blogApp/model"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -22,6 +23,8 @@ func ConnectDB() {
 	}
 
 	log.Println("Database connection successful")
+
+	db.AutoMigrate(new(model.Blog))
 
 	DBCon = db
 }
