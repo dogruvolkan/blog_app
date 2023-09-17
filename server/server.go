@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/dogruvolkan/blogApp/database"
-	router "github.com/dogruvolkan/blogApp/roter"
+	router "github.com/dogruvolkan/blogApp/router"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/joho/godotenv"
