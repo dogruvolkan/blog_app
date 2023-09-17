@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/dogruvolkan/blogApp/database"
@@ -8,6 +9,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// list all blog
 func BlogList(c *fiber.Ctx) error {
 	context := fiber.Map{
 		"statusText": "Ok",
@@ -23,6 +25,36 @@ func BlogList(c *fiber.Ctx) error {
 	return c.JSON(context)
 }
 
+// blog read by id
+func BlogRead(c *fiber.Ctx) error {
+	context := fiber.Map{
+		"statusText": "Ok",
+		"msg":        "Read a blog by id",
+	}
+
+	db := database.DBCon
+
+	id := c.Params("id")
+
+	var record model.Blog
+
+	db.Find(&record, id)
+
+	if record.ID == 0 {
+		log.Println("Record not found")
+		context["statusText"] = ""
+		context["msg"] = "Record not found"
+		c.Status(400)
+		return c.JSON(context)
+	}
+
+	context["blog_record"] = record
+
+	c.Status(200)
+	return c.JSON(context)
+}
+
+// blog create
 func BlogCreate(c *fiber.Ctx) error {
 	context := fiber.Map{
 		"statusText": "Ok",
@@ -52,6 +84,7 @@ func BlogCreate(c *fiber.Ctx) error {
 	return c.JSON(context)
 }
 
+// blog update by id
 func BlogUpdate(c *fiber.Ctx) error {
 	context := fiber.Map{
 		"statusText": "Ok",
@@ -86,14 +119,42 @@ func BlogUpdate(c *fiber.Ctx) error {
 	context["data"] = record
 
 	c.Status(200)
+	fmt.Println(record)
 	return c.JSON(context)
 }
 
+// blog delete by id
 func BlogDelete(c *fiber.Ctx) error {
+	c.Status(400)
 	context := fiber.Map{
-		"statusText": "Ok",
-		"msg":        "Delete a blog by id",
+		"statusText": "",
+		"msg":        "",
 	}
+
+	db := database.DBCon
+
+	id := c.Params("id")
+
+	var record model.Blog
+
+	db.First(&record, id)
+
+	if record.ID == 0 {
+		log.Println("Record not found")
+		context["statusText"] = ""
+		context["msg"] = "Record not found"
+		return c.JSON(context)
+	}
+
+	result := db.Delete(record)
+
+	if result.Error != nil {
+		context["msg"] = "Something went wrong"
+		return c.JSON(context)
+	}
+
+	context["statusText"] = "Ok"
+	context["msg"] = "Record deleted successfullly"
 
 	c.Status(200)
 	return c.JSON(context)

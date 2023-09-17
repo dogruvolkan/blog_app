@@ -13,7 +13,8 @@ func SetupRotes(app *fiber.App) {
 	//delete => delete
 
 	app.Get("/", controller.BlogList)
+	app.Get("/:id" ,controller.BlogRead)
 	app.Post("/", controller.BlogCreate)
 	app.Put("/:id", controller.BlogUpdate)
-	app.Delete("/", controller.BlogDelete)
+	app.Delete("/:id", controller.BlogDelete)
 }
