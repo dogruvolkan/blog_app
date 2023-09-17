@@ -2,7 +2,9 @@ package main
 
 import (
 	"github.com/dogruvolkan/blogApp/database"
+	router "github.com/dogruvolkan/blogApp/roter"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 )
 
 func init() {
@@ -21,11 +23,9 @@ func main() {
 
 	app := fiber.New()
 
-	app.Get("/", func(c *fiber.Ctx) error {
+	app.Use(logger.New())
 
-		return c.JSON(fiber.Map{"message": "welcome my blog app"})
-		//return c.SendString("Hello world")
-	})
+	router.SetupRotes(app)
 
 	app.Listen(":8000")
 
