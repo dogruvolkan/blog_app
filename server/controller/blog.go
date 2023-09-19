@@ -44,7 +44,7 @@ func BlogRead(c *fiber.Ctx) error {
 		log.Println("Record not found")
 		context["statusText"] = ""
 		context["msg"] = "Record not found"
-		c.Status(400)
+		c.Status(404)
 		return c.JSON(context)
 	}
 
