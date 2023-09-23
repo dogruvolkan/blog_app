@@ -1,4 +1,4 @@
-import BlogDetailPage from "./pages/BlogDetailPage";
+import { BlogDetail } from "./components/BlogDetail";
 import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 
@@ -7,7 +7,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="blog/:id" element={<BlogDetailPage />}></Route>
+        <Route path="blog/:id" element={<BlogDetail />}></Route>
       </Routes>
     </>
   )
