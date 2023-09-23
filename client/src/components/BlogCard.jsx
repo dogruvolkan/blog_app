@@ -14,7 +14,7 @@ function BlogCard({ blog, index }) {
             </div>
             <div className="btns">
                 <div>
-                    <AiOutlineEdit className="edit-btn" id="btn" />
+                    <Link to={`/edit/${blog.id}`}> <AiOutlineEdit className="edit-btn" id="btn" /></Link>
                 </div>
                 <div>
                     <AiOutlineDelete className="delete-btn" id="btn" />

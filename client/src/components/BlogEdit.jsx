@@ -1,11 +1,17 @@
-import "../assets/BlogCreate.css";
+import "../assets/BlogEdit.css";
 import { useForm } from "react-hook-form"
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import useFetchData from "../hooks/useFetchData";
 
-export default function BlogCreate() {
+export default function BlogEdit() {
+
 
     const navigate = useNavigate();
+    const { id } = useParams();
+
+    const url = import.meta.env.VITE_API_URL + "/" + id;
+    const [data] = useFetchData(url)
 
     const {
         register,
@@ -16,23 +22,23 @@ export default function BlogCreate() {
 
     const saveForm = async (data) => {
         try {
-            const url = import.meta.env.VITE_API_URL;
-            await axios.post(url, data);
+            const response = await axios.put(url, data);
             navigate("/");
         } catch (error) {
             console.log(error.response)
         }
     }
 
+
     return (
-        <div className="blog-create-container">
-            <h2>Create a new blog</h2>
+        <div className="edit-container">
+            <h2>Edit blog</h2>
             <form onSubmit={handleSubmit(saveForm)}>
                 <div className="input-area">
                     <label >Blog Title:</label>
                     <input
                         className="create-input"
-                        defaultValue="" {...register("title", {
+                        defaultValue={data.title} {...register("title", {
                             required: { value: true, message: "Title is reqired" },
                             min: {
                                 value: 3,
@@ -49,7 +55,7 @@ export default function BlogCreate() {
                     <label >Blog Content:</label>
                     <textarea
                         className="create-input"
-                        defaultValue="" {...register("post", {
+                        defaultValue={data.post} {...register("post", {
                             required: { value: true, message: "Content is reqired" },
                             min: {
                                 value: 3,
@@ -62,7 +68,7 @@ export default function BlogCreate() {
                             {errors.post.message}
                         </div>}
                 </div>
-                <button type="submit" className="create-btn">Add</button>
+                <button type="submit" className="create-btn">Edit</button>
             </form>
         </div>
     )
