@@ -3,6 +3,7 @@ package controller
 import (
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/dogruvolkan/blogApp/database"
 	"github.com/dogruvolkan/blogApp/model"
@@ -16,10 +17,12 @@ func BlogList(c *fiber.Ctx) error {
 		"msg":        "Blog List",
 	}
 
+	time.Sleep(time.Millisecond * 500)
+
 	db := database.DBCon
 	var records []model.Blog
 	db.Find(&records)
-	context["blog_records"] = records
+	context["blog_record"] = records
 
 	c.Status(200)
 	return c.JSON(context)
@@ -31,6 +34,8 @@ func BlogRead(c *fiber.Ctx) error {
 		"statusText": "Ok",
 		"msg":        "Read a blog by id",
 	}
+
+	time.Sleep(time.Millisecond * 500)
 
 	db := database.DBCon
 
