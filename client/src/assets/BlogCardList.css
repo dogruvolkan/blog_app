@@ -1,15 +1,40 @@
+.blog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 150px;
+}
+
 .blog-container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 20px;
-    margin: 100px 0;
+    gap: 40px;
+    margin: 50px;
 }
 
-.spinner-container{
+
+.spinner-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 100px 0;
+    margin: 50px 0;
+}
+
+.add-btn {
+    border: none;
+    padding: 5px 20px;
+    background-color: #C70039;
+    transition: all .5s ease;
+    border-radius: 3px;
+}
+
+.add-btn:hover{
+    opacity: .9;
+}
+
+.add-btn .link {
+    text-decoration: none;
+    color: #ffff;
 }

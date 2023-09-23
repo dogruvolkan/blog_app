@@ -6,8 +6,7 @@ export function BlogDetail() {
 
     const { id } = useParams()
     const url = import.meta.env.VITE_API_URL + "/" + id;
-    const data = useFetchData(url)
-    console.log(url);
+    const [data] = useFetchData(url)
 
     return (
         <div className="blog-detail-container">
