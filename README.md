@@ -12,4 +12,5 @@ This is blog web application created with golang , fiber , gorm , react
 - [ ] add searchbar to homapage  for seaarching blog from bloglist
 - [ ] add copy button for blog link. it is for sharing blog link  anybody
 - [ ] add topic , author , create and update time area.
-- [ ] 
+
+![blog](../blog_app/client/src/assets/blog.png)
