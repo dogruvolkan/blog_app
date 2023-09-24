@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form"
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import useFetchData from "../hooks/useFetchData";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function BlogEdit() {
 
@@ -23,8 +25,18 @@ export default function BlogEdit() {
     const saveForm = async (data) => {
         try {
             await axios.put(url, data);
+            toast.success("Düzenleme işlemi başarılı!", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 2000,
+            });
+            //waiting close toastify
+            await new Promise((resolve) => setTimeout(resolve, 2000));
             navigate("/");
         } catch (error) {
+            toast.error("Düzenleme işlemi başarısız!", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 2000,
+            });
             console.log(error.response)
         }
     }
@@ -79,6 +91,7 @@ export default function BlogEdit() {
                 </div>
                 <button type="submit" className="create-btn">Edit</button>
             </form>
+            <ToastContainer />
         </div>
     )
 }

@@ -3,6 +3,8 @@ import "../assets/BlogCard.css"
 import { AiOutlineEdit, AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function BlogCard({ blog, index }) {
 
@@ -15,10 +17,18 @@ function BlogCard({ blog, index }) {
             if (result) {
                 await axios.delete(url);
                 setDeleted(true);
-                window.location.reload(true);
+                //window.location.reload(true);
+                toast.success("Silme işlemi başarılı", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 2000, 
+                });
             }
 
         } catch (error) {
+            toast.error("Silme işlemi başarısız", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 2000, 
+            });
             console.log(error.response)
         }
     }
@@ -28,7 +38,6 @@ function BlogCard({ blog, index }) {
     }
 
     const newBlog = blog.post.slice(0, 90)
-    console.log("new", newBlog);
 
     return (
         <div key={index} className="card">
@@ -48,6 +57,7 @@ function BlogCard({ blog, index }) {
                     <Link to={`/blog/${blog.id}`}>  <AiOutlineEye className="detail-btn" id="btn" /></Link>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     )
 }

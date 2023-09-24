@@ -2,6 +2,8 @@ import "../assets/BlogCreate.css";
 import { useForm } from "react-hook-form"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function BlogCreate() {
 
@@ -18,8 +20,18 @@ export default function BlogCreate() {
         try {
             const url = import.meta.env.VITE_API_URL;
             await axios.post(url, data);
+            toast.success("Ekleme işlemi başarılı!", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 2000,
+            });
+            //waiting close toastify
+            await new Promise((resolve) => setTimeout(resolve, 2000));
             navigate("/");
         } catch (error) {
+            toast.error("Ekleme işlemi başarısız!", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 2000,
+            });
             console.log(error.response)
         }
     }
@@ -73,6 +85,7 @@ export default function BlogCreate() {
                 </div>
                 <button type="submit" className="create-btn">Add</button>
             </form>
+            <ToastContainer />
         </div>
     )
 }
