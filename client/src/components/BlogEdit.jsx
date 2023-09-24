@@ -22,7 +22,7 @@ export default function BlogEdit() {
 
     const saveForm = async (data) => {
         try {
-            const response = await axios.put(url, data);
+            await axios.put(url, data);
             navigate("/");
         } catch (error) {
             console.log(error.response)
