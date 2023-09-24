@@ -40,9 +40,13 @@ export default function BlogEdit() {
                         className="create-input"
                         defaultValue={data.title} {...register("title", {
                             required: { value: true, message: "Title is reqired" },
-                            min: {
-                                value: 3,
-                                message: "Title should be minium 3 characters"
+                            minLength: {
+                                value: 10,
+                                message: "Title should be minium 10 characters"
+                            },
+                            maxLength: {
+                                value: 30,
+                                message: "Title should be maximum 30 characters"
                             },
                         })}
                     />
@@ -54,12 +58,17 @@ export default function BlogEdit() {
                 <div className="input-area">
                     <label >Blog Content:</label>
                     <textarea
+                        rows="8"
                         className="create-input"
                         defaultValue={data.post} {...register("post", {
                             required: { value: true, message: "Content is reqired" },
-                            min: {
-                                value: 3,
-                                message: "Content should be minium 3 characters"
+                            minLength: {
+                                value: 50,
+                                message: "Content should be minium 50 characters"
+                            },
+                            maxLength: {
+                                value: 3000,
+                                message: "Content should be maximum 1000 characters"
                             },
                         })}
                     />

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../assets/BlogCard.css"
-import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import { AiOutlineEdit, AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -15,6 +15,7 @@ function BlogCard({ blog, index }) {
             if (result) {
                 await axios.delete(url);
                 setDeleted(true);
+                window.location.reload(true);
             }
 
         } catch (error) {
@@ -26,12 +27,15 @@ function BlogCard({ blog, index }) {
         return null;
     }
 
+    const newBlog = blog.post.slice(0, 90)
+    console.log("new", newBlog);
+
     return (
         <div key={index} className="card">
             <img className="img" src={`https://picsum.photos/${index + 1}00/200`} />
             <div className="content">
-                <Link to={`/blog/${blog.id}`}><h5>{blog.title}</h5> </Link>
-                <p>{blog.post}</p>
+                <h5 className="blog-title">{blog.title}</h5>
+                <p className="blog-content">{newBlog}{blog.post.length > 90 && '...'}</p>
             </div>
             <div className="btns">
                 <div>
@@ -40,9 +44,11 @@ function BlogCard({ blog, index }) {
                 <div>
                     <AiOutlineDelete className="delete-btn" id="btn" onClick={handleDelete} />
                 </div>
+                <div>
+                    <Link to={`/blog/${blog.id}`}>  <AiOutlineEye className="detail-btn" id="btn" /></Link>
+                </div>
             </div>
         </div>
-
     )
 }
 

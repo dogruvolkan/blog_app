@@ -8,11 +8,13 @@ export function BlogDetail() {
     const url = import.meta.env.VITE_API_URL + "/" + id;
     const [data] = useFetchData(url)
 
+    console.log("tip", (parseInt(id)+5));
+
     return (
         <div className="blog-detail-container">
-            <div>img</div>
-            <div>{data.title}</div>
-            <div>{data.post}</div>
+            <div> <img className="img" src={`https://picsum.photos/${parseInt(id) + 1}00/200`} /></div>
+            <h2>{data.title}</h2>
+            <p>{data.post}</p>
         </div>
     )
 }

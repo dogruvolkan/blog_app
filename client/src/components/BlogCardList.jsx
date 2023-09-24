@@ -20,13 +20,16 @@ function BlogCardList() {
     return (
         <div className="blog">
             <div className="blog-header">
-                <h1>Blog List</h1>
+                {data.length > 0 && <h1>Blog List</h1>}
+                <b>{data.length} {data.length > 1 ? "blogs" : "blog"} found</b>
                 <button className="add-btn"><Link to="/add" className="link">Add New Blog</Link></button>
             </div>
             <div className="blog-container">
-                {data && data.map((blog, index) => (
+                {data.length > 0 ? data.map((blog, index) => (
                     <BlogCard blog={blog} index={index} />
-                ))}
+                )) : <p className="blog-empty">
+                    No blogs found. <br /> Click on add new blog button to create
+                </p>}
             </div>
         </div>
     )
