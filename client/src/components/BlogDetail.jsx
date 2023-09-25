@@ -13,6 +13,7 @@ export function BlogDetail() {
             <div> <img className="img" src={`https://picsum.photos/${parseInt(id) + 1}00/200`} /></div>
             <h2>{data.title}</h2>
             <p>{data.post}</p>
+            <p>{data.author}</p>
         </div>
     )
 }

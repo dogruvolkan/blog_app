@@ -68,6 +68,27 @@ export default function BlogEdit() {
                         </div>}
                 </div>
                 <div className="input-area">
+                    <label >Author:</label>
+                    <input
+                        className="create-input"
+                        defaultValue={data.author} {...register("author", {
+                            required: { value: true, message: "Author is reqired" },
+                            minLength: {
+                                value: 5,
+                                message: "Author should be minium 5 characters"
+                            },
+                            maxLength: {
+                                value: 20,
+                                message: "Author should be maximum 20 characters"
+                            },
+                        })}
+                    />
+                    {errors.author &&
+                        <div className="form-error">
+                            {errors.author.message}
+                        </div>}
+                </div>
+                <div className="input-area">
                     <label >Blog Content:</label>
                     <textarea
                         rows="8"

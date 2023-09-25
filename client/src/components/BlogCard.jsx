@@ -20,14 +20,14 @@ function BlogCard({ blog, index }) {
                 //window.location.reload(true);
                 toast.success("Silme işlemi başarılı", {
                     position: toast.POSITION.TOP_RIGHT,
-                    autoClose: 2000, 
+                    autoClose: 2000,
                 });
             }
 
         } catch (error) {
             toast.error("Silme işlemi başarısız", {
                 position: toast.POSITION.TOP_RIGHT,
-                autoClose: 2000, 
+                autoClose: 2000,
             });
             console.log(error.response)
         }
@@ -45,6 +45,8 @@ function BlogCard({ blog, index }) {
             <div className="content">
                 <h5 className="blog-title">{blog.title}</h5>
                 <p className="blog-content">{newBlog}{blog.post.length > 90 && '...'}</p>
+                <p>{blog.author}</p>
+                <p>{blog.createdAt}</p>
             </div>
             <div className="btns">
                 <div>

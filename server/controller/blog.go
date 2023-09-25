@@ -74,6 +74,7 @@ func BlogCreate(c *fiber.Ctx) error {
 		context["msg"] = "something went wrong"
 	}
 
+	record.CreatedAt = time.Now()
 	result := database.DBCon.Create(record)
 
 	if result.Error != nil {
@@ -114,6 +115,7 @@ func BlogUpdate(c *fiber.Ctx) error {
 		log.Println("Error in parsing request")
 	}
 
+	record.CreatedAt = time.Now()
 	result := database.DBCon.Save(record)
 
 	if result.Error != nil {
