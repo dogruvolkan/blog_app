@@ -11,10 +11,11 @@
 
 .blog-create-container form {
     width: 50%;
-    background-color: #B4B4B3;
+    background-color: #c6a8c1;
+    border:1px solid #c6a8c1;
     padding: 20px 50px;
     border-radius: 3px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .input-area {
@@ -45,6 +46,10 @@
     border-radius: 3px;
     padding: 5px 10px;
     resize: none;
+}
+
+.create-select{
+    padding:5px 10px;
 }
 
 .form-error {

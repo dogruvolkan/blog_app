@@ -9,4 +9,5 @@ type Blog struct {
 	Category  string    `json:"category" gorm:"not null; column:category; size:50`
 	CreatedAt time.Time `json:"createdAt" gorm:"not null; column:createdAt; size:100`
 	Post      string    `json:"post" gorm:"not null; column:post; size:255`
+	ImgPath   string    `json:"imgPath" gorm:"not null ; column: imgPath ; size:100`
 }

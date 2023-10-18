@@ -89,6 +89,20 @@ export default function BlogEdit() {
                         </div>}
                 </div>
                 <div className="input-area">
+                    <label>Blog Category</label>
+                    <select className="create-select" name="" id="" value={data.category} {...register("category", {
+                        required: { value: true, message: "Blog category is required" }
+                    })}>
+                        <option value="html5">Html5</option>
+                        <option value="css3">Css3</option>
+                        <option value="javascript">Javascript</option>
+                    </select>
+                    {errors.post &&
+                        <div className="form-error">
+                            {errors.post.category}
+                        </div>}
+                </div>
+                <div className="input-area">
                     <label >Blog Content:</label>
                     <textarea
                         rows="8"
@@ -108,6 +122,16 @@ export default function BlogEdit() {
                     {errors.post &&
                         <div className="form-error">
                             {errors.post.message}
+                        </div>}
+                </div>
+                <div className="input-area">
+                    <label>Blog Image:</label>
+                    <input type="file" defaultValue={data.imgPath} {...register("imgPath", {
+                        required: { value: true, message: "image is reqired" },
+                    })} />
+                    {errors.post &&
+                        <div className="form-error">
+                            {errors.post.imgPath}
                         </div>}
                 </div>
                 <button type="submit" className="create-btn">Edit</button>

@@ -1,7 +1,7 @@
 .card {
     border: 1px solid rgb(226, 226, 226);
     border-radius: 8px;
-    transition: box-shadow 0.3s ease;
+    transition: all .5s ease;
     width: 300px;
     height: 350px;
     padding: 10px;
@@ -16,6 +16,18 @@
     border-top-left-radius: 8px;
     width: 100%;
     height: 200px;
+    position: relative;
+}
+
+.blog-category {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: 1px solid purple;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 8px;
+    transition: all .5s ease;
 }
 
 .content {
@@ -31,6 +43,17 @@
 
 .content .blog-content {
     font-size: 15px;
+}
+
+.blog-author {
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.blog-create-time {
+    text-align: left;
+    font-size: 14px;
 }
 
 .btns {
@@ -50,7 +73,7 @@
     height: 25px;
     border-radius: 50%;
     padding: 4px;
-    transition: all .5s;
+    transition: all .5s ease;
 }
 
 #btn:hover {

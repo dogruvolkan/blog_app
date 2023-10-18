@@ -17,9 +17,17 @@ export default function BlogCreate() {
 
 
     const saveForm = async (data) => {
+
+        data.file = data.imgPath[0];
+        data.imgPath = null;
+
         try {
             const url = import.meta.env.VITE_API_URL;
-            await axios.post(url, data);
+            await axios.post(url, data, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            });
             toast.success("Ekleme işlemi başarılı!", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 2000,
@@ -83,12 +91,26 @@ export default function BlogCreate() {
                         </div>}
                 </div>
                 <div className="input-area">
+                    <label>Blog Category</label>
+                    <select className="create-select" name="" id="" {...register("category", {
+                        required: { value: true, message: "Blog category is required" }
+                    })}>
+                        <option value="html5">Html5</option>
+                        <option value="css3">Css3</option>
+                        <option value="javascript">Javascript</option>
+                    </select>
+                    {errors.post &&
+                        <div className="form-error">
+                            {errors.post.category}
+                        </div>}
+                </div>
+                <div className="input-area">
                     <label >Blog Content:</label>
                     <textarea
                         rows="8"
                         className="create-input"
                         defaultValue="" {...register("post", {
-                            required: { value: true, message: "Content is reqired" },
+                            required: { value: true, message: "Content is required" },
                             minLength: {
                                 value: 50,
                                 message: "Content should be minium 50 characters"
@@ -102,6 +124,16 @@ export default function BlogCreate() {
                     {errors.post &&
                         <div className="form-error">
                             {errors.post.message}
+                        </div>}
+                </div>
+                <div className="input-area">
+                    <label>Blog Image:</label>
+                    <input type="file" defaultValue="" {...register("imgPath", {
+                        required: { value: true, message: "image is reqired" },
+                    })} />
+                    {errors.post &&
+                        <div className="form-error">
+                            {errors.post.imgPath}
                         </div>}
                 </div>
                 <button type="submit" className="create-btn">Add</button>

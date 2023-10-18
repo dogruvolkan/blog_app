@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FormatedDate } from "../utils/formatedDate";
 
 function BlogCard({ blog, index }) {
 
@@ -37,16 +38,23 @@ function BlogCard({ blog, index }) {
         return null;
     }
 
+    const blogTime = blog.createdAt
+    const formatedTime = FormatedDate(blogTime)
+
     const newBlog = blog.post.slice(0, 90)
+    //img upload from server
+
+    const imgSrc = import.meta.env.VITE_API_URL + '/' + blog.imgPath;
 
     return (
         <div key={index} className="card">
-            <img className="img" src={`https://picsum.photos/${index + 1}00/200`} />
+            <img className="img" src={`${imgSrc}`} />
+            <p className="blog-category">{blog.category}</p>
             <div className="content">
                 <h5 className="blog-title">{blog.title}</h5>
                 <p className="blog-content">{newBlog}{blog.post.length > 90 && '...'}</p>
-                <p>{blog.author}</p>
-                <p>{blog.createdAt}</p>
+                <p className="blog-author">{blog.author}</p>
+                <p className="blog-create-time">{formatedTime}</p>
             </div>
             <div className="btns">
                 <div>

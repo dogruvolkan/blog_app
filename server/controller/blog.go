@@ -3,6 +3,7 @@ package controller
 import (
 	"fmt"
 	"log"
+	"os"
 	"time"
 
 	"github.com/dogruvolkan/blogApp/database"
@@ -68,13 +69,32 @@ func BlogCreate(c *fiber.Ctx) error {
 
 	record := new(model.Blog)
 
-	if err := c.BodyParser(&record); err != nil {
+	if err := c.BodyParser(record); err != nil {
 		log.Println("Error in parsing request.")
 		context["statusText"] = ""
 		context["msg"] = "something went wrong"
 	}
 
-	record.CreatedAt = time.Now()
+	timeNow := time.Now()
+	record.CreatedAt = timeNow
+
+	//upload img
+	file, err := c.FormFile("file")
+
+	if err != nil {
+		log.Println("Error in file upload.", err)
+	}
+
+	if file.Size > 0 {
+		filename := "./static/uploads/" + file.Filename
+
+		if err := c.SaveFile(file, filename); err != nil {
+			log.Println("Error in file uploading...", err)
+		}
+
+		record.ImgPath = filename
+	}
+
 	result := database.DBCon.Create(record)
 
 	if result.Error != nil {
@@ -115,7 +135,9 @@ func BlogUpdate(c *fiber.Ctx) error {
 		log.Println("Error in parsing request")
 	}
 
-	record.CreatedAt = time.Now()
+	timeNow := time.Now()
+	record.CreatedAt = timeNow
+
 	result := database.DBCon.Save(record)
 
 	if result.Error != nil {
@@ -151,6 +173,14 @@ func BlogDelete(c *fiber.Ctx) error {
 		context["statusText"] = ""
 		context["msg"] = "Record not found"
 		return c.JSON(context)
+	}
+
+	//delete image
+	imgName := record.ImgPath
+	if imgName != "" {
+		if err := os.Remove(imgName); err != nil {
+			log.Println("Error in deleting image")
+		}
 	}
 
 	result := db.Delete(record)
